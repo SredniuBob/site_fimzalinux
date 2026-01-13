@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fimzalinux - Дистрибутив на основе Ubuntu 25.10</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #77216F;
+            --secondary: #E95420;
+            --dark: #333;
+            --light: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Ubuntu, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), #5e2750);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #c34113;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-google-drive {
+            background: #4285F4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-google-drive:hover {
+            background: #3367D6;
+        }
+
+        /* News Banner */
+        .news-banner {
+            background: linear-gradient(90deg, var(--primary), #E95420);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+
+        .news-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Downloads */
+        .download-section {
+            background: #f0f7ff;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .download-info {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .version-badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .file-info {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .file-info li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .file-info li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .news-img {
+            height: 200px;
+            background: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .news-tag {
+            background: #e1f5fe;
+            color: #0277bd;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        /* Documentation Preview */
+        .docs-preview {
+            background: linear-gradient(135deg, var(--primary), #5e2750);
+            color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .download-section {
+                padding: 2rem 1rem;
+            }
+
+            .news-banner h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- News Banner -->
+    <div class="news-banner">
+        <div class="container">
+            <h3>🎉 Вышел Fimzalinux 1.0!</h3>
+            <p>Первый стабильный релиз нашего дистрибутива на основе Ubuntu 25.10. Скачивайте прямо сейчас!</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fab fa-ubuntu"></i>
+                    <a href="index.html">Fimzalinux</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#download"><i class="fas fa-download"></i> Скачать</a></li>
+                    <li><a href="documentation.html"><i class="fas fa-book"></i> Документация</a></li>
+                    <li><a href="#news"><i class="fas fa-newspaper"></i> Новости</a></li>
+                    <li><a href="#community"><i class="fas fa-users"></i> Сообщество</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Fimzalinux 1.0</h1>
+            <p>Новый стабильный дистрибутив на основе Ubuntu 25.10. Оптимизирован для повседневного использования, работы и развлечений.</p>
+            <a href="#download" class="btn">Скачать 1.0</a>
+            <a href="documentation.html" class="btn btn-outline">Документация</a>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download">
+        <div class="container">
+            <h2 class="section-title">Скачать Fimzalinux</h2>
+            
+            <div class="download-section">
+                <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                    Desktop Edition <span class="version-badge">Версия 1.0</span>
+                </h2>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                    Полная версия для настольных компьютеров и ноутбуков с предустановленными приложениями
+                </p>
+                
+                <div class="download-info">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);">
+                        <i class="fab fa-google-drive"></i> Загрузка через Google Drive
+                    </h3>
+                    
+                    <div class="file-info">
+                        <ul>
+                            <li><strong>Формат:</strong> ISO образ для записи на USB</li>
+                            <li><strong>Размер:</strong> 5.93 GB</li>
+                            <li><strong>Архитектура:</strong> x86_64 (64-бит)</li>
+                            <li><strong>Основа:</strong> Ubuntu 25.10</li>
+                            <li><strong>Тип установки:</strong> Live USB с возможностью установки</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="margin: 1.5rem 0; color: #666;">
+                        Для установки запишите образ на USB-накопитель (8GB или больше) с помощью Rufus, Etcher или аналогичной программы.
+                    </p>
+                    
+                    <a href="https://drive.google.com/file/d/1B_lKzSJLgbtU6m_XsOk_v7oO2LvD_sfh/view?usp=drive_link" target="_blank" class="btn btn-google-drive" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                        <i class="fab fa-google-drive fa-lg"></i>
+                        Скачать через Google Drive
+                    </a>
+                    
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #777;">
+                        <i class="fas fa-shield-alt"></i> Файл проверен: MD5: (поверьте на слово)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Что нового в версии 1.0</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Оптимизированная производительность</h3>
+                    <p>Улучшенное ядро Linux 6.17 с оптимизациями для десктопного использования. Ускоренная загрузка и работа приложений.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Новый интерфейс</h3>
+                    <p>Обновлённая тема оформления KDE Plasma с тёмным и светлым режимами. Улучшенный пользовательский опыт.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-box"></i>
+                    <h3>Предустановленные приложения</h3>
+                    <p>Включает все необходимые программы: офисный пакет, браузер, медиаплеер, графические редакторы и инструменты разработки.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News -->
+    <section id="news">
+        <div class="container">
+            <h2 class="section-title">Новости проекта</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1629654291660-3c98113a0438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">3 января 2026 <span class="news-tag">Релиз</span></div>
+                        <h3>Вышел Fimzalinux 1.0</h3>
+                        <p>Первый стабильный релиз нашего дистрибутива! Включает все последние обновления Ubuntu 25.10 и уникальные улучшения от команды Fimzalinux.</p>
+                        <a href="#" class="btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">15 декабря 2025 <span class="news-tag">Обновление</span></div>
+                        <h3>Обновление репозиториев</h3>
+                        <p>Добавлены дополнительные зеркала для ускорения загрузки пакетов в Европе и Азии.</p>
+                        <a href="#" class="btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">6 декабря 2025 <span class="news-tag">Анонс</span></div>
+                        <h3>Скоро выйдет версия 1.0</h3>
+                        <p>Анонсирован первый стабильный релиз Fimzalinux. Ожидайте улучшений в производительности и стабильности.</p>
+                        <a href="#" class="btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Preview -->
+    <section>
+        <div class="container">
+            <div class="docs-preview">
+                <i class="fas fa-book-open fa-3x" style="margin-bottom: 1rem; opacity: 0.9;"></i>
+                <h2 style="margin-bottom: 1rem;">Документация Fimzalinux</h2>
+                <p style="max-width: 800px; margin: 0 auto 2rem; opacity: 0.9;">
+                    Подробное руководство по установке, настройке и использованию Fimzalinux 1.0. Узнайте все возможности нашего дистрибутива.
+                </p>
+                <a href="documentation.html" class="btn" style="background: white; color: var(--primary); padding: 15px 40px; font-size: 1.1rem;">
+                    <i class="fas fa-book-reader"></i> Открыть документацию
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="community">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fimzalinux 1.0</h3>
+                    <p>Дистрибутив на основе Ubuntu 25.10. Стабильный, быстрый, удобный.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#download">Скачать 1.0</a></li>
+                        <li><a href="documentation.html">Документация</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#">Форум</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Установка</a></li>
+                        <li><a href="#">Решение проблем</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Fimzalinux Project. Основан на Ubuntu 25.10.</p>
+                <p>Ubuntu и Canonical являются товарными знаками Canonical Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

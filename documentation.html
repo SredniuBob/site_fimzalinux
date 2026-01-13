@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация Fimzalinux 1.0</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #77216F;
+            --secondary: #E95420;
+            --dark: #333;
+            --light: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Ubuntu, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #5e2750);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-home {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .back-home:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Documentation Content */
+        .docs-container {
+            display: flex;
+            min-height: calc(100vh - 200px);
+            margin: 2rem 0;
+        }
+
+        .docs-sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-right: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .docs-content {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .docs-sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .docs-nav {
+            list-style: none;
+        }
+
+        .docs-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .docs-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .docs-nav a:hover {
+            background: #f0f7ff;
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .docs-nav a.active {
+            background: #f0f7ff;
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: bold;
+        }
+
+        .docs-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 20px;
+        }
+
+        .docs-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .docs-section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .version-badge {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .download-box {
+            background: linear-gradient(135deg, #f0f7ff, #e3f2fd);
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            background: #c34113;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-google-drive {
+            background: #4285F4;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-google-drive:hover {
+            background: #3367D6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .docs-container {
+                flex-direction: column;
+            }
+            
+            .docs-sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 2rem;
+                position: static;
+            }
+            
+            .docs-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fab fa-ubuntu"></i>
+                <a href="index.html">Fimzalinux 1.0</a>
+            </div>
+            <h1 style="margin: 0.5rem 0; font-size: 2.5rem;">Документация</h1>
+            <p style="opacity: 0.9; margin-bottom: 1rem;">Полное руководство по установке и использованию Fimzalinux 1.0</p>
+            <a href="index.html" class="back-home">
+                <i class="fas fa-arrow-left"></i> Вернуться на главную
+            </a>
+        </div>
+    </header>
+
+    <!-- Documentation Content -->
+    <div class="container">
+        <div class="docs-container">
+            <!-- Sidebar -->
+            <nav class="docs-sidebar">
+                <h3><i class="fas fa-book"></i> Содержание</h3>
+                <ul class="docs-nav">
+                    <li><a href="#about" class="active">О Fimzalinux 1.0</a></li>
+                    <li><a href="#requirements">Системные требования</a></li>
+                    <li><a href="#download">Скачивание</a></li>
+                    <li><a href="#installation">Установка</a></li>
+                    <li><a href="#first-steps">Первые шаги</a></li>
+                    <li><a href="#apps">Предустановленные приложения</a></li>
+                    <li><a href="#updates">Обновления</a></li>
+                    <li><a href="#troubleshooting">Решение проблем</a></li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;"><i class="fas fa-download"></i> Скачать</h3>
+                <a href="index.html#download" class="btn" style="width: 100%; text-align: center; margin: 10px 0;">
+                    <i class="fas fa-download"></i> Скачать 1.0
+                </a>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="docs-content">
+                <section id="about" class="docs-section">
+                    <h2>О Fimzalinux 1.0 <span class="version-badge">Стабильный релиз</span></h2>
+                    <p>Fimzalinux 1.0 — это первый стабильный релиз нашего дистрибутива, основанного на Ubuntu 25.10. Этот выпуск включает все последние обновления и улучшения, специально подобранные для оптимальной работы на десктопных системах.</p>
+                    
+                    <h3>Ключевые особенности:</h3>
+                    <ul>
+                        <li><strong>Основа:</strong> Ubuntu 25.10 с ядром Linux 6.17</li>
+                        <li><strong>Архитектура:</strong> Только x86_64 (64-бит)</li>
+                        <li><strong>Интерфейс:</strong> Современный KDE Plasma с тёмной темой</li>
+                        <li><strong>Обновления:</strong> Поддержка до сентября 2026 года</li>
+                        <li><strong>Лицензия:</strong> Свободное программное обеспечение</li>
+                    </ul>
+                </section>
+
+                <section id="requirements" class="docs-section">
+                    <h2><i class="fas fa-server"></i> Системные требования</h2>
+                    
+                    <h3>Минимальные требования:</h3>
+                    <ul>
+                        <li>Процессор: 64-бит, 2 ядра</li>
+                        <li>ОЗУ: 4 GB</li>
+                        <li>Жёсткий диск: 25 GB свободного места</li>
+                        <li>Видеокарта: с поддержкой OpenGL 3.3+</li>
+                        <li>USB-порт для установочного носителя</li>
+                    </ul>
+
+                    <h3>Рекомендуемые требования:</h3>
+                    <ul>
+                        <li>Процессор: 4+ ядра</li>
+                        <li>ОЗУ: 8 GB или больше</li>
+                        <li>Жёсткий диск: SSD, 50+ GB</li>
+                        <li>Интернет: для обновлений и установки ПО</li>
+                    </ul>
+
+                    <div class="info">
+                        <strong>Примечание:</strong> Fimzalinux 1.0 поддерживает только 64-битные системы. 32-битная архитектура не поддерживается.
+                    </div>
+                </section>
+
+                <section id="download" class="docs-section">
+                    <h2><i class="fas fa-download"></i> Скачивание Fimzalinux</h2>
+                    
+                    <div class="download-box">
+                        <h3>Скачать через Google Drive</h3>
+                        <p>Текущая версия: <strong>Fimzalinux 1.0 Desktop Edition</strong></p>
+                        <p>Размер файла: <strong>5.93</strong> | Формат: <strong>ISO</strong></p>
+                        
+                        <a href="https://drive.google.com/file/d/1B_lKzSJLgbtU6m_XsOk_v7oO2LvD_sfh/view?usp=drive_link" target="_blank" class="btn btn-google-drive">
+                            <i class="fab fa-google-drive"></i> Скачать с Google Drive
+                        </a>
+                    </div>
+
+                    <h3>Проверка образа</h3>
+                    <p>После скачивания рекомендуется проверить контрольные суммы для подтверждения целостности файла:</p>
+                    
+                    <div class="code-block">
+# Проверка MD5 в Linux
+md5sum fimzalinux-1.0-desktop-amd64.iso
+
+# Проверка SHA256 в Linux
+sha256sum fimzalinux-1.0-desktop-amd64.iso
+
+# В Windows используйте CertUtil
+certutil -hashfile fimzalinux-1.0-desktop-amd64.iso MD5
+certutil -hashfile fimzalinux-1.0-desktop-amd64.iso SHA256
+</div>
+                </section>
+
+                <section id="installation" class="docs-section">
+                    <h2><i class="fas fa-desktop"></i> Установка на компьютер</h2>
+                    
+                    <h3>1. Создание загрузочного USB-накопителя</h3>
+                    <p>Для записи образа на USB вам понадобится:</p>
+                    <ul>
+                        <li>USB-накопитель объёмом 8 GB или больше</li>
+                        <li>Программа для записи ISO-образов</li>
+                    </ul>
+
+                    <h4>Рекомендуемые программы:</h4>
+                    <div class="code-block">
+# Linux: используйте dd или Etcher
+sudo dd if=fimzalinux-1.0-desktop-amd64.iso of=/dev/sdX bs=4M status=progress
+
+# Windows: Rufus или Etcher
+# macOS: Etcher или Terminal
+</div>
+
+                    <h3>2. Установка системы</h3>
+                    <ol>
+                        <li>Вставьте USB-накопитель в компьютер</li>
+                        <li>Перезагрузите компьютер и войдите в BIOS/UEFI (обычно F2, F12, Del)</li>
+                        <li>Выберите загрузку с USB-накопителя</li>
+                        <li>Выберите "Try Fimzalinux" для тестирования или "Install Fimzalinux" для установки</li>
+                        <li>Следуйте инструкциям установщика:
+                            <ul>
+                                <li>Выберите язык и раскладку клавиатуры</li>
+                                <li>Настройте подключение к интернету</li>
+                                <li>Выберите тип установки (рекомендуется "Обычная установка")</li>
+                                <li>Создайте учётную запись пользователя</li>
+                                <li>Дождитесь завершения установки</li>
+                            </ul>
+                        </li>
+                        <li>Перезагрузите компьютер и извлеките USB-накопитель</li>
+                    </ol>
+
+                    <div class="warning">
+                        <strong>Внимание:</strong> Установка сотрёт все данные на выбранном диске. Создайте резервные копии важных данных перед установкой.
+                    </div>
+                </section>
+
+                <section id="first-steps" class="docs-section">
+                    <h2><i class="fas fa-play-circle"></i> Первые шаги после установки</h2>
+                    
+                    <h3>Обновление системы</h3>
+                    <p>После первого входа в систему откройте терминал и выполните:</p>
+                    
+                    <div class="code-block">
+# Обновление списка пакетов
+sudo apt update
+
+# Установка обновлений
+sudo apt upgrade
+
+# Установка обновлений дистрибутива (если доступны)
+sudo apt dist-upgrade
+</div>
+
+                    <h3>Установка дополнительного ПО</h3>
+                    <p>В Fimzalinux уже включены основные приложения, но вы можете установить дополнительные:</p>
+                    
+                    <div class="code-block">
+# Мультимедиа кодеки
+sudo apt install ubuntu-restricted-extras
+
+# Инструменты разработчика
+sudo apt install build-essential git
+
+# Дополнительные драйверы
+sudo ubuntu-drivers autoinstall
+</div>
+                </section>
+
+                <section id="apps" class="docs-section">
+                    <h2><i class="fas fa-th"></i> Предустановленные приложения</h2>
+                    
+                    <h3>Основные приложения:</h3>
+                    <ul>
+                        <li><strong>Firefox</strong> — веб-браузер</li>
+                        <li><strong>LibreOffice</strong> — офисный пакет</li>
+                        <li><strong>GIMP</strong> — графический редактор</li>
+                        <li><strong>VLC</strong> — медиаплеер</li>
+                        <li><strong>Thunderbird</strong> — почтовый клиент</li>
+                        <li><strong>Transmission</strong> — BitTorrent-клиент</li>
+                    </ul>
+
+                    <h3>Системные утилиты:</h3>
+                    <ul>
+                        <li><strong>GNOME Software</strong> — центр приложений</li>
+                        <li><strong>GParted</strong> — редактор разделов</li>
+                        <li><strong>Timeshift</strong> — создание резервных копий системы</li>
+                        <li><strong>Terminal</strong> — эмулятор терминала</li>
+                    </ul>
+                </section>
+
+                <section id="updates" class="docs-section">
+                    <h2><i class="fas fa-sync-alt"></i> Обновления системы</h2>
+                    
+                    <p>Fimzalinux получает обновления из репозиториев Ubuntu. Вы можете обновлять систему несколькими способами:</p>
+                    
+                    <h3>Через графический интерфейс:</h3>
+                    <ol>
+                        <li>Откройте "Программы и обновления"</li>
+                        <li>Перейдите на вкладку "Обновления"</li>
+                        <li>Нажмите "Проверить сейчас"</li>
+                        <li>Установите доступные обновления</li>
+                    </ol>
+
+                    <h3>Через терминал:</h3>
+                    <div class="code-block">
+# Проверить обновления
+sudo apt update
+
+# Показать доступные обновления
+apt list --upgradable
+
+# Установить все обновления
+sudo apt upgrade
+
+# Полное обновление системы
+sudo apt full-upgrade
+</div>
+
+                    <div class="info">
+                        <strong>Совет:</strong> Регулярно обновляйте систему для получения исправлений безопасности и новых функций.
+                    </div>
+                </section>
+
+                <section id="troubleshooting" class="docs-section">
+                    <h2><i class="fas fa-wrench"></i> Решение проблем</h2>
+                    
+                    <h3>Проблемы с загрузкой:</h3>
+                    <p>Если система не загружается после установки:</p>
+                    <ul>
+                        <li>Проверьте настройки BIOS/UEFI (отключите Secure Boot)</li>
+                        <li>Убедитесь, что USB-накопитель извлечён</li>
+                        <li>Попробуйте выбрать старую версию ядра в меню GRUB</li>
+                    </ul>
+
+                    <h3>Проблемы с Wi-Fi:</h3>
+                    <div class="code-block">
+# Проверить доступные сети
+nmcli device wifi list
+
+# Подключиться к сети
+nmcli device wifi connect "SSID" password "пароль"
+
+# Перезапустить сетевой менеджер
+sudo systemctl restart NetworkManager
+</div>
+
+                    <h3>Проблемы с драйверами:</h3>
+                    <div class="code-block">
+# Проверить рекомендуемые драйверы
+ubuntu-drivers devices
+
+# Установить все рекомендуемые драйверы
+sudo ubuntu-drivers autoinstall
+</div>
+
+                    <div class="warning">
+                        <strong>Нужна помощь?</strong> Посетите наш <a href="#">форум поддержки</a> для получения дополнительной помощи.
+                    </div>
+                </section>
+
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                    <h3 style="color: var(--primary);">Нашли ошибку в документации?</h3>
+                    <p>Помогите нам улучшить документацию, сообщив об ошибках или предложив улучшения.</p>
+                    <a href="index.html" class="btn" style="background: var(--primary);">
+                        <i class="fas fa-home"></i> Вернуться на главную
+                    </a>
+                    <a href="index.html#download" class="btn">
+                        <i class="fas fa-download"></i> Скачать Fimzalinux 1.0
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fimzalinux 1.0</h3>
+                    <p>Первый стабильный релиз. Основан на Ubuntu 25.10.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index.html#download">Скачать</a></li>
+                        <li><a href="documentation.html">Документация</a></li>
+                        <li><a href="index.html#news">Новости</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ресурсы</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Форум</a></li>
+                        <li><a href="#">Исходный код</a></li>
+                        <li><a href="#">Багрепорты</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Fimzalinux Project. Документация распространяется под лицензией Apache 2.0</p>
+                <p>Ubuntu и Canonical являются товарными знаками Canonical Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for documentation navigation
+        document.querySelectorAll('.docs-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    // Update active link
+                    document.querySelectorAll('.docs-nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active link on scroll
+        const sections = document.querySelectorAll('.docs-section');
+        const navLinks = document.querySelectorAll('.docs-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if(scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
